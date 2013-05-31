@@ -1,0 +1,22 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+  <f:entry title="${%Projects to build}" field="childProjects">
+	<f:textbox value="${instance.childProjectsValue}"
+               checkUrl="'descriptorByName/DownStreamTrigger/check?value='+encodeURIComponent(this.value)"/>
+  </f:entry>
+  <f:entry title="${%Build result is}" description="${%Trigger downstream job if build result meets condition}">
+     <select name="descriptor.strategy">
+       <j:forEach var="st" items="${descriptor.STRATEGY_VALUES}">
+          <f:option value="${st.name()}" selected="${instance.strategy==st}">${st.displayName}</f:option>
+       </j:forEach>
+     </select>
+     <select name="descriptor.threshold">
+       <j:forEach var="thr" items="${descriptor.THRESHOLD_VALUES}">
+          <f:option selected="${instance.threshold.toString()==thr}">${thr}</f:option>
+       </j:forEach>
+     </select>
+  </f:entry>
+  <f:entry title="">
+      <f:checkbox id="downStreamTrigger.onlyIfParameterEnabled" name="downStreamTrigger.onlyIfParameterEnabled" checked="${instance.onlyIfParameterEnabled}" />
+      <label class="attach-previous">${%Trigger only if the parameterized trigger enabled for downstream}</label>
+  </f:entry>
+</j:jelly>
