@@ -44,8 +44,8 @@ public class DownStreamTrigger extends DownstreamTrigger {
 		}
 		
         @Override
-        public BuildTrigger newInstance(StaplerRequest req, JSONObject formData) throws FormException {
-			return new BuildTrigger(formData.getString("childProjects"), formData.getString("threshold"), 
+        public Publisher newInstance(StaplerRequest req, JSONObject formData) throws FormException {
+			return new DownStreamTrigger(formData.getString("childProjects"), formData.getString("threshold"), 
 					formData.getString("strategy"), formData.getBoolean("onlyIfParameterEnabled"));
         }
 	}
